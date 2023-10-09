@@ -9,41 +9,16 @@ from gamecontroller.game_state import GameState
 class Controller:
     def __init__(self):
         self.__game_state = GameState.GREETING
-        self.__greeting_handler = GreetingModeHandler()
-        self.__choose_game_mode_handler = ChooseGameModeHandler()
-        self.__cv_mode_handler = CVModeHandler()
-        self.__organisation_mode_handler = OrganisationModeHandler()
-
-    def __handle_greeting(self):
-        new_game_state = self.__greeting_handler.handle()
-        self.__game_state = new_game_state
-
-    def __handle_choose_game_mode(self):
-        new_game_state = self.__choose_game_mode_handler.handle()
-        self.__game_state = new_game_state
-
-    def __handle_game_mode_CV(self):
-        new_game_state = self.__cv_mode_handler.handle()
-        self.__game_state = new_game_state
-
-    def __handle_game_mode_organisation(self):
-        new_game_state = self.__organisation_mode_handler.handle()
-        self.__game_state = new_game_state
-
-    def __handle_exit(self):
-        print(EXIT_MESSAGE)
-        exit(0)
+        self.__handlers = {
+            GameState.GREETING: GreetingModeHandler(),
+            GameState.CHOOSE_GAME_MODE: ChooseGameModeHandler(),
+            GameState.GAME_MODE_CV: CVModeHandler(),
+            GameState.GAME_MODE_ORGANISATION: OrganisationModeHandler(),
+        }
 
     def main_loop(self):
-        while True:
-            if self.__game_state == GameState.GREETING:
-                self.__handle_greeting()
-            elif self.__game_state == GameState.CHOOSE_GAME_MODE:
-                self.__handle_choose_game_mode()
-            elif self.__game_state == GameState.GAME_MODE_CV:
-                self.__handle_game_mode_CV()
-            elif self.__game_state == GameState.GAME_MODE_ORGANISATION:
-                self.__handle_game_mode_organisation()
-            elif self.__game_state == GameState.EXIT:
-                self.__handle_exit()
+        while self.__game_state != GameState.EXIT:
+            handler = self.__handlers[self.__game_state]
+            self.__game_state = handler.handle()
 
+        print(EXIT_MESSAGE)
