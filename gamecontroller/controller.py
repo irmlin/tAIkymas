@@ -6,6 +6,10 @@ from gamecontroller.game_mode_handlers.organisation_mode_handler import Organisa
 from gamecontroller.game_state import GameState
 
 
+class GameStateHandlerNotImplementedError(BaseException):
+    pass
+
+
 class Controller:
     def __init__(self):
         self.__game_state = GameState.GREETING
@@ -13,11 +17,13 @@ class Controller:
             GameState.GREETING: GreetingModeHandler(),
             GameState.CHOOSE_GAME_MODE: ChooseGameModeHandler(),
             GameState.GAME_MODE_CV: CVModeHandler(),
-            GameState.GAME_MODE_ORGANISATION: OrganisationModeHandler(),
+            GameState.GAME_MODE_ORGANISATION: OrganisationModeHandler()
         }
 
     def main_loop(self):
         while self.__game_state != GameState.EXIT:
+            if self.__game_state not in self.__handlers:
+                raise GameStateHandlerNotImplementedError(f'Game state {self.__game_state} has no handler assigned!')
             handler = self.__handlers[self.__game_state]
             self.__game_state = handler.handle()
 
