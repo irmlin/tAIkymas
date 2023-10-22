@@ -4,6 +4,7 @@ from gamecontroller.game_mode_handlers.choose_game_mode_handler import ChooseGam
 from gamecontroller.game_mode_handlers.cv_mode_handler import CVModeHandler
 from gamecontroller.game_mode_handlers.organisation_mode_handler import OrganisationModeHandler
 from gamecontroller.game_state import GameState
+from gpt import GPT
 
 
 class GameStateHandlerNotImplementedError(BaseException):
@@ -13,11 +14,14 @@ class GameStateHandlerNotImplementedError(BaseException):
 class Controller:
     def __init__(self):
         self.__game_state = GameState.GREETING
+        self.__gpt = GPT()
+        # Call once
+        self.__gpt.new_chat()
         self.__handlers = {
             GameState.GREETING: GreetingModeHandler(),
             GameState.CHOOSE_GAME_MODE: ChooseGameModeHandler(),
-            GameState.GAME_MODE_CV: CVModeHandler(),
-            GameState.GAME_MODE_ORGANISATION: OrganisationModeHandler()
+            GameState.GAME_MODE_CV: CVModeHandler(gpt=self.__gpt),
+            GameState.GAME_MODE_ORGANISATION: OrganisationModeHandler(gpt=self.__gpt)
         }
 
     def main_loop(self):

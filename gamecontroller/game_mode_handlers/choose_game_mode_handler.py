@@ -12,7 +12,7 @@ class ChooseGameModeHandler(BaseHandler):
         self.__input_validator = InputValidator(allowed_inputs=self.__allowed_inputs)
 
     def handle(self) -> GameState:
-        user_input = self.get_user_input()
+        user_input = self.get_user_input(self.__input_message)
 
         if user_input == '1':
             next_game_state = GameState.GAME_MODE_CV
@@ -27,11 +27,11 @@ class ChooseGameModeHandler(BaseHandler):
 
         return next_game_state
 
-    def get_user_input(self):
-        user_input = input(self.__input_message)
+    def get_user_input(self, prompt: str):
+        user_input = input(prompt)
 
         # Validate input
-        if not self.__input_validator.validate(input_=user_input):
+        if not self.__input_validator.validate_by_value(input_=user_input):
             print(INVALID_OPTION_MESSAGE)
             return self.INVALID_USER_INPUT
 

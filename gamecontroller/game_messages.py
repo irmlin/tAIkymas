@@ -1,7 +1,7 @@
-GREETING_MESSAGE = "\n" \
+TITLE_MESSAGE = "\n" \
                 "***  tAIkymas   ***\n" \
-                "***  Main Menu  ***\n" \
-                "Choose action (enter number):\n" \
+                "***  Main Menu  ***\n"
+GREETING_MESSAGE = "Choose action (enter number):\n" \
                 "\t1. What's the purpose of the game?\n" \
                 "\t2. What's my goal as a player?\n" \
                 "\t3. How does the game work (rules etc.)?\n" \

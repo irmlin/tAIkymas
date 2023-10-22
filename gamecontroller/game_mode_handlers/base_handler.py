@@ -16,7 +16,7 @@ class BaseHandler(ABC):
         pass
 
     @abstractmethod
-    def get_user_input(self) -> str:
+    def get_user_input(self, prompt) -> str:
         """
         Get input from the user, validate it (preferably) and return it.
         :return:

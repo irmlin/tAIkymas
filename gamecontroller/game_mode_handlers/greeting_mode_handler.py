@@ -1,8 +1,11 @@
 from gamecontroller.game_messages import GREETING_MESSAGE, INVALID_OPTION_MESSAGE, GAME_PURPOSE_MESSAGE, \
-    PLAYER_GOAL_MESSAGE, GAME_RULES_MESSAGE
+    PLAYER_GOAL_MESSAGE, GAME_RULES_MESSAGE, TITLE_MESSAGE
 from gamecontroller.game_mode_handlers.base_handler import BaseHandler
 from gamecontroller.game_state import GameState
 from validator import InputValidator
+from colorama import init, Fore
+
+init(autoreset=True)
 
 
 class GreetingModeHandler(BaseHandler):
@@ -13,7 +16,8 @@ class GreetingModeHandler(BaseHandler):
         self.__input_validator = InputValidator(allowed_inputs=self.__allowed_inputs)
 
     def handle(self) -> GameState:
-        user_input = self.get_user_input()
+        print(f'{Fore.YELLOW}{TITLE_MESSAGE}')
+        user_input = self.get_user_input(self.__input_message)
 
         if user_input == '1':
             print(GAME_PURPOSE_MESSAGE)
@@ -33,11 +37,11 @@ class GreetingModeHandler(BaseHandler):
 
         return next_game_state
 
-    def get_user_input(self) -> str:
-        user_input = input(self.__input_message)
+    def get_user_input(self, prompt) -> str:
+        user_input = input(prompt)
 
         # Validate input
-        if not self.__input_validator.validate(input_=user_input):
+        if not self.__input_validator.validate_by_value(input_=user_input):
             print(INVALID_OPTION_MESSAGE)
             return self.INVALID_USER_INPUT
 
