@@ -19,7 +19,7 @@ class CVModeHandler(BaseHandler):
 
     def handle(self) -> GameState:
 
-        question = "Create unique CVs of 3 more people, each CV is 3 sentences long. " \
+        question = "Generate 3 distinct CVs for fictional individuals in different professions. " \
                    "Then, create a profitable startup idea that these 3 people " \
                    "could do in 3 sentences. Briefly but precisely tell what each" \
                    "person's responsibilities would be and what product they would all sell. " \
