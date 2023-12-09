@@ -1,5 +1,6 @@
 TITLE_MESSAGE = "\n" \
                 "***  tAIkymas   ***\n" \
+		"***  WWBB - Who wants to be a bilionare?  ***\n" \
                 "***  Main Menu  ***\n"
 GREETING_MESSAGE = "Choose action (enter number):\n" \
                 "\t1. What's the purpose of the game?\n" \

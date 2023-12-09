@@ -27,9 +27,9 @@ class CVModeHandler(BaseHandler):
                    "title the paragraphs 'CVs of 3 people' and 'Startup idea' " \
                    "accordingly."
         response = self.__handle_dialog(question=question, waiting_text='Generating CVs')
-        print(response)
+        print(response, '\n')
 
-        user_startup_idea = self.get_user_input(prompt='Enter your startup idea, which involves these 3 people:')
+        user_startup_idea = self.get_user_input(prompt='Enter your startup idea, which involves these 3 people: ')
         question = f"Here is another startup idea for the 3 people: {user_startup_idea}\n\n" \
                    f"Your task is: imagine you are an investor and you are choosing a startup to " \
                    f"invest to. Evaluate your startup idea and the idea I just provided. The business idea " \
@@ -40,9 +40,9 @@ class CVModeHandler(BaseHandler):
                    f"'Investor's feedback'. I need 3 sentence feedbacks for each idea. " \
                    f"Don't tell me which idea is better just yet and don't summarize at the end."
         response = self.__handle_dialog(question=question, waiting_text='Evaluating your idea')
-        print(response)
+        print(response, '\n')
 
-        additional_arguments = self.get_user_input(prompt='Enter any additional arguments, why your idea is better:')
+        additional_arguments = self.get_user_input(prompt='Enter any additional arguments, why your idea is better: ')
         question = f"Here are additional arguments, why the second idea is better: {additional_arguments}\n\n" \
                    f"Your task: provide a shor counter argument, why your generated idea is better. Title this " \
                    f"paragraph as 'Counter argument'. " \
@@ -50,7 +50,7 @@ class CVModeHandler(BaseHandler):
                    f"would invest to. Title the paragraph as 'Investor's final decision' and provide 2 sentences " \
                    f"long reasoning."
         response = self.__handle_dialog(question=question, waiting_text='Making final decision')
-        print(response)
+        print(response, '\n')
         print(f"{'-'*100}")
 
         return GameState.GREETING
