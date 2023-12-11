@@ -3,6 +3,7 @@ from gamecontroller.game_mode_handlers import GreetingModeHandler
 from gamecontroller.game_mode_handlers.choose_game_mode_handler import ChooseGameModeHandler
 from gamecontroller.game_mode_handlers.cv_mode_handler import CVModeHandler
 from gamecontroller.game_mode_handlers.organisation_mode_handler import OrganisationModeHandler
+from gamecontroller.game_mode_handlers.quiz_mode_handler import QuizModeHandler
 from gamecontroller.game_state import GameState
 from gpt import GPT
 
@@ -21,7 +22,8 @@ class Controller:
             GameState.GREETING: GreetingModeHandler(),
             GameState.CHOOSE_GAME_MODE: ChooseGameModeHandler(),
             GameState.GAME_MODE_CV: CVModeHandler(gpt=self.__gpt),
-            GameState.GAME_MODE_ORGANISATION: OrganisationModeHandler(gpt=self.__gpt)
+            GameState.GAME_MODE_ORGANISATION: OrganisationModeHandler(gpt=self.__gpt),
+            GameState.GAME_MODE_QUIZ: QuizModeHandler()
         }
 
     def main_loop(self):

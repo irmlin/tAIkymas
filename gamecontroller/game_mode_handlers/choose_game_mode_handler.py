@@ -8,7 +8,7 @@ class ChooseGameModeHandler(BaseHandler):
     def __init__(self):
         super().__init__()
         self.__input_message = CHOOSE_GAME_MODE_MENU_MESSAGE
-        self.__allowed_inputs = ['1', '2', '3', '4']
+        self.__allowed_inputs = ['1', '2', '3', '4', '5']
         self.__input_validator = InputValidator(allowed_inputs=self.__allowed_inputs)
 
     def handle(self) -> GameState:
@@ -19,6 +19,8 @@ class ChooseGameModeHandler(BaseHandler):
         elif user_input == '2':
             next_game_state = GameState.GAME_MODE_ORGANISATION
         elif user_input == '3':
+            next_game_state = GameState.GAME_MODE_QUIZ
+        elif user_input == '4':
             next_game_state = GameState.GREETING
         elif user_input == self.INVALID_USER_INPUT:
             next_game_state = GameState.CHOOSE_GAME_MODE
